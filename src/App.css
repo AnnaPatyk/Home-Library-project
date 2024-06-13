@@ -1,0 +1,20 @@
+.App {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   background: #090d0c;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-blend-mode: overlay;
+   color: white;
+   width: 100vw;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: stretch;
+}
+main {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+}

@@ -1,17 +1,31 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import style from "./navBar.module.css";
 
 export default function NavBar() {
   return (
-    <header>
-      <nav>
-        <NavLink to={"/"}>Home</NavLink>
-        <NavLink to={"/books"}>Books</NavLink>
-        <NavLink to={"/new"}>New</NavLink>
-        <NavLink to={"/add-book"}>Add book</NavLink>
+    <header className={style.navbar}>
+      <nav className={style.nav}>
         <div>
           {" "}
-          <NavLink to={"/login"}>login</NavLink>
+          <NavLink className={style.navLinks} to={"/"}>
+            Home
+          </NavLink>
+          <NavLink className={style.navLinks} to={"/books"}>
+            Books
+          </NavLink>
+          <NavLink className={style.navLinks} to={"/new"}>
+            New
+          </NavLink>
+          <NavLink className={style.navLinks} to={"/add-book"}>
+            Add book
+          </NavLink>
+        </div>
+        <div className={style.login}>
+          {" "}
+          <NavLink className={style.navLinks} to={"/login"}>
+            login
+          </NavLink>
         </div>
       </nav>
     </header>

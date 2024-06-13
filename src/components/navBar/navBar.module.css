@@ -1,6 +1,60 @@
 .navbar {
-   background-color: aquamarine;
+   position: -webkit-sticky;
+   position: sticky;
+   top: 0;
+   background-color: #08261899;
+
+   -webkit-backdrop-filter: blur(10px);
+   backdrop-filter: blur(10px);
+   z-index: 5;
+   padding-inline: 16px;
+   height: auto;
+   font-size: 18px;
+   font-weight: 600;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap;
 }
 .login {
    color: red;
+}
+.nav {
+   flex: 0 1 100%;
+   display: flex;
+   justify-content: space-between;
+}
+.nav div:not(:last-child) {
+   width: 50%;
+}
+
+.nav div {
+   display: flex;
+   flex-wrap: wrap;
+}
+.navLinks {
+   position: relative;
+   text-decoration: none;
+   color: #37a67d;
+   letter-spacing: 3px;
+   padding: 15px;
+   transition: color 0.3s ease-in-out;
+}
+.navLinks::before {
+   z-index: -1;
+   content: "";
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   width: 0;
+   background-image: linear-gradient(to right, #37a67d, #27f2de93);
+   transition: width 0.3s ease-in-out;
+}
+
+.navLinks:hover::before {
+   width: 100%;
+}
+.navLinks:hover {
+   color: #082618;
 }
