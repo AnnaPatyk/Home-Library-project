@@ -1,19 +1,18 @@
 import style from "./article.module.css";
 import React from "react";
 import Card from "./Card";
-import { book } from "../../homeLibraryBD";
+import { Link } from "react-router-dom";
 
-export default function ArtiklBlok({ title }) {
+export default function ArtiklBlok({ title, arr, link }) {
   return (
     <article className={style.article}>
       <h4>{title}</h4>
       <div className={style.articleCards}>
-        <Card obj={book}></Card>
-        <Card obj={book}></Card>
-        <Card obj={book}></Card>
-        <Card obj={book}></Card>
+        {arr.map((book) => (
+          <Card key={book._id} obj={book}></Card>
+        ))}
       </div>
-      <button>Показати більше >> </button>
+      <Link to={link}>Показати більше >> </Link>
     </article>
   );
 }

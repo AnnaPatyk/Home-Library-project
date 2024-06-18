@@ -4,15 +4,14 @@ export default function Card({ obj }) {
   return (
     <div className={style.card}>
       <div className={style.imageBox}>
-        <img className={style.img} src={obj.img} alt="description" />
+        <img className={style.img} src={obj.image} alt="description" />
       </div>
       <div className={style.content}>
         <h2>{obj.title}</h2>
         <p>{obj.author}</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <p>{obj.publicationYear}</p>
+        <p>{obj.genre}</p>
+        <p>{obj.rating}</p>
       </div>
     </div>
   );

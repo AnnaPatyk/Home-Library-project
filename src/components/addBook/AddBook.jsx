@@ -1,5 +1,10 @@
 import React from "react";
+import FormAddBook from "./FormAddBook";
 
 export default function AddBook() {
-  return <div>AddBook</div>;
+  return (
+    <div>
+      <FormAddBook></FormAddBook>
+    </div>
+  );
 }
