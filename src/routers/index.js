@@ -5,6 +5,7 @@ import New from "../components/news/New";
 import AddBook from "../components/addBook/AddBook";
 import Login from "../components/login/Login";
 import App from "../App";
+import Book from "../components/books/Book";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      { path: "/:id", element: <Book /> },
     ],
   },
 ]);

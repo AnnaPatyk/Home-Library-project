@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { allBooks, createBook } from "../thunks/booksThunks";
-import { all } from "axios";
+import { allBooks, createBook, getBook } from "../thunks/booksThunks";
 
 const initialState = {
   data: [],
@@ -8,7 +7,7 @@ const initialState = {
   error: null,
 };
 
-const booksSlise = createSlice({
+const booksSlice = createSlice({
   name: "books",
   initialState,
   extraReducers: (builder) => {
@@ -30,4 +29,4 @@ const booksSlise = createSlice({
   },
 });
 
-export default booksSlise.reducer;
+export default booksSlice.reducer;

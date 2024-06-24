@@ -7,9 +7,12 @@
 .articleCards {
    display: flex;
    flex-direction: row;
-   justify-content: space-around;
+   flex-wrap: wrap;
+   row-gap: 24px;
+   justify-content: space-between;
    margin-bottom: 20px;
 }
+
 .article a {
    align-self: flex-end;
    text-decoration: none;
@@ -27,4 +30,13 @@
 .article a:hover {
    transform: scale(1.1);
    transition: 1s;
+}
+.cardLink {
+   flex: 0 1 22%;
+   aspect-ratio: 1/0.7;
+   border-radius: 8px;
+   position: relative;
+   cursor: pointer;
+   overflow: hidden;
+   background: #37a67d33;
 }

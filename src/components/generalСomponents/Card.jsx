@@ -4,7 +4,11 @@ export default function Card({ obj }) {
   return (
     <div className={style.card}>
       <div className={style.imageBox}>
-        <img className={style.img} src={obj.image} alt="description" />
+        <img
+          className={style.img}
+          src={Array.isArray(obj.image) ? obj.image[0] : obj.image}
+          alt="description"
+        />
       </div>
       <div className={style.content}>
         <h2>{obj.title}</h2>

@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const http = axios.create({
-  baseURL: "http://localhost:4000/books",
+  baseURL: "http://localhost:4000/",
 });
