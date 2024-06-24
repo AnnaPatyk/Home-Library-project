@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBook, updateBook } from "../../thunks/booksThunks";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import BookPopup from "./BookPopup";
 import { message } from "antd";
+import Coments from "../comentsBlock/Coments";
+import CommentsCarousel from "../comentsBlock/CommentsCarousel";
 const star = "\u2605";
 
 export default function Book() {
   const { data: book, loading } = useSelector((state) => state.book);
+  const [login, setLogin] = useState(true);
   const [open, setOpen] = useState(false);
   const [free, setFree] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
@@ -29,7 +32,6 @@ export default function Book() {
     setOpen(!open);
   };
   const submitHandler = (values, formikBag) => {
-    console.log(values);
     let update;
     if (free) {
       update = {
@@ -37,7 +39,7 @@ export default function Book() {
         status: "unavailable",
       };
     } else {
-      let reservedBySet = new Set(book.reservedBy);
+      let reservedBySet = new Set(book.waitlist);
       reservedBySet.add(values);
       update = {
         waitlist: Array.from(reservedBySet),
@@ -87,11 +89,16 @@ export default function Book() {
           ) : (
             <button onClick={showBookModal}>Сповістити про наявність</button>
           )}
-
-          <button>Редагувати </button>
         </div>
+        <Coments id={id} book={book}></Coments>
+        {book.comments && (
+          <CommentsCarousel arr={book.comments}></CommentsCarousel>
+        )}
       </article>
       {contextHolder}
+
+      {login && <button>Редагувати </button>}
+
       <BookPopup
         state={free}
         title={"Замовити читання"}

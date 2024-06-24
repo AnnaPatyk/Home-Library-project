@@ -10,7 +10,9 @@ export default function Home() {
 
   return (
     <main>
-      <CarouselBlok arr={books}></CarouselBlok>
+      <CarouselBlok
+        arr={books.filter((obj) => obj.status === "soon")}
+      ></CarouselBlok>
       <ArtiklBlok
         title={"Топ книг"}
         arr={books.filter((book) => book.rating === 5).slice(0, 4)}

@@ -6,6 +6,7 @@ import AddBook from "../components/addBook/AddBook";
 import Login from "../components/login/Login";
 import App from "../App";
 import Book from "../components/books/Book";
+import UpdateBook from "../components/books/UpdateBook";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,10 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      { path: "/:id", element: <Book /> },
+      {
+        path: "/:id",
+        element: <Book />,
+      },
     ],
   },
 ]);
