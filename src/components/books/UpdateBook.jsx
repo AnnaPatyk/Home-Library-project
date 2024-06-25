@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateBook } from "../../thunks/booksThunks";
-import { Button, Upload, message } from "antd";
+import { Button, Modal, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import InputForm from "../generalСomponents/inputForm/InputForm";
 import BookSchema from "./updateBookSchema";
@@ -39,6 +39,9 @@ const genres = [
 
 export default function UpdateBook() {
   const book = useSelector((state) => state.book.data);
+  const formikRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
   let { id } = useParams();
   const dispatch = useDispatch();
   const [img, setImg] = useState("");
@@ -60,165 +63,186 @@ export default function UpdateBook() {
       }
     },
   };
-
+  const info = () => {
+    messageApi.info("Запит відправлено");
+  };
+  const showModal = () => {
+    setOpen(!open);
+  };
   const submitHandler = (values, formikBag) => {
     if (img === "") {
       formikBag.setErrors({ image: "помилка" });
       return;
     }
-    formikBag.setFieldValue("image", img);
-    const update = values;
-    console.log(values, update, id);
+    const update = { ...values, image: img };
+
     dispatch(updateBook({ id, update }));
+    info();
+    showModal();
     formikBag.resetForm();
   };
   return (
     <div>
-      <h2>Редагувати книгу</h2>
-      <Formik
-        initialValues={book}
-        validationSchema={BookSchema}
-        onSubmit={submitHandler}
-        enableReinitialize
+      <button style={{ marginTop: "50px" }} onClick={showModal}>
+        Редагувати
+      </button>
+      {contextHolder}
+      <Modal
+        title="Редагувати книгу"
+        open={open}
+        onOk={() => {
+          if (formikRef.current) {
+            formikRef.current.submitForm();
+          }
+        }}
+        onCancel={showModal}
+        cancelText={"Вийти"}
+        okText={"Відправити запит"}
       >
-        {({ values }) => (
-          <Form>
-            <InputForm
-              name={"title"}
-              type={"text"}
-              id={"title"}
-              placeholder={"Назва"}
-              component={"span"}
-              textLabel={"Назва книги : "}
-            ></InputForm>
-            <InputForm
-              name={"author"}
-              type={"text"}
-              id={"author"}
-              placeholder={"Автор"}
-              component={"span"}
-              textLabel={"Автор : "}
-            ></InputForm>
-            <InputForm
-              name={"publicationYear"}
-              type={"number"}
-              id={"publicationYear"}
-              placeholder={"Рік видавництва"}
-              component={"span"}
-              textLabel={"Рік видавництва: "}
-            ></InputForm>
-            <div>
-              <Field as="select" name="genre">
-                <option value="">Оберіть жанр</option>
-                {genres.map((genre, index) => (
-                  <option key={index} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="genre" component={"span"}></ErrorMessage>
-            </div>
-            <div>
-              <Field as="select" name="status">
-                <option value="">Оберіть статус</option>
-                <option value="available">{"Доступна"}</option>
-                <option value="soon">{"Незабаром у доступі"}</option>
-              </Field>
-            </div>
+        <Formik
+          innerRef={formikRef}
+          initialValues={book}
+          validationSchema={BookSchema}
+          onSubmit={submitHandler}
+          enableReinitialize
+        >
+          {({ values }) => (
+            <Form>
+              <InputForm
+                name={"title"}
+                type={"text"}
+                id={"title"}
+                placeholder={"Назва"}
+                component={"span"}
+                textLabel={"Назва книги : "}
+              ></InputForm>
+              <InputForm
+                name={"author"}
+                type={"text"}
+                id={"author"}
+                placeholder={"Автор"}
+                component={"span"}
+                textLabel={"Автор : "}
+              ></InputForm>
+              <InputForm
+                name={"publicationYear"}
+                type={"number"}
+                id={"publicationYear"}
+                placeholder={"Рік видавництва"}
+                component={"span"}
+                textLabel={"Рік видавництва: "}
+              ></InputForm>
+              <div>
+                <Field as="select" name="genre">
+                  <option value="">Оберіть жанр</option>
+                  {genres.map((genre, index) => (
+                    <option key={index} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage name="genre" component={"span"}></ErrorMessage>
+              </div>
+              <div>
+                <Field as="select" name="status">
+                  <option value="">Оберіть статус</option>
+                  <option value="available">{"Доступна"}</option>
+                  <option value="soon">{"Незабаром у доступі"}</option>
+                </Field>
+              </div>
 
-            <InputForm
-              name={"rating"}
-              type={"number"}
-              id={"rating"}
-              placeholder={"Рейтинг"}
-              component={"span"}
-              textLabel={"Рейтинг: "}
-            ></InputForm>
+              <InputForm
+                name={"rating"}
+                type={"number"}
+                id={"rating"}
+                placeholder={"Рейтинг"}
+                component={"span"}
+                textLabel={"Рейтинг: "}
+              ></InputForm>
 
-            <InputForm
-              name={"description"}
-              as={"textarea"}
-              id={"description"}
-              placeholder={"Опис"}
-              component={"span"}
-              textLabel={"Опис : "}
-            ></InputForm>
+              <InputForm
+                name={"description"}
+                as={"textarea"}
+                id={"description"}
+                placeholder={"Опис"}
+                component={"span"}
+                textLabel={"Опис : "}
+              ></InputForm>
 
-            <InputForm
-              name={"rating"}
-              type={"number"}
-              id={"rating"}
-              placeholder={"Рейтинг"}
-              component={"span"}
-              textLabel={"Рейтинг: "}
-            ></InputForm>
-            <InputForm
-              name="borrowedBy.name"
-              type="text"
-              id="borrowedBy.name"
-              placeholder="Запозичено (Ім'я)"
-              textLabel="Запозичено (Ім'я): "
-            />
-            <InputForm
-              name="borrowedBy.date"
-              type="text"
-              id="borrowedBy.date"
-              placeholder="Запозичено (Дата)"
-              textLabel="Запозичено (Дата): "
-            />
-            <InputForm
-              name="borrowedBy.email"
-              type="email"
-              id="borrowedBy.email"
-              placeholder="Запозичено (Email)"
-              textLabel="Запозичено (Email): "
-            />
+              <InputForm
+                name={"rating"}
+                type={"number"}
+                id={"rating"}
+                placeholder={"Рейтинг"}
+                component={"span"}
+                textLabel={"Рейтинг: "}
+              ></InputForm>
+              <InputForm
+                name="borrowedBy.name"
+                type="text"
+                id="borrowedBy.name"
+                placeholder="Запозичено (Ім'я)"
+                textLabel="Запозичено (Ім'я): "
+              />
+              <InputForm
+                name="borrowedBy.date"
+                type="text"
+                id="borrowedBy.date"
+                placeholder="Запозичено (Дата)"
+                textLabel="Запозичено (Дата): "
+              />
+              <InputForm
+                name="borrowedBy.email"
+                type="email"
+                id="borrowedBy.email"
+                placeholder="Запозичено (Email)"
+                textLabel="Запозичено (Email): "
+              />
 
-            <FieldArray name="waitlist">
-              {({ push, remove }) => (
-                <div>
-                  {values.waitlist &&
-                    values.waitlist.length > 0 &&
-                    values.waitlist.map((waitlistItem, index) => (
-                      <div key={index}>
-                        <InputForm
-                          name={`waitlist.${index}.name`}
-                          type="text"
-                          placeholder="Ім'я"
-                          textLabel="Ім'я: "
-                        />
-                        <InputForm
-                          name={`waitlist.${index}.email`}
-                          type="email"
-                          placeholder="Email"
-                          textLabel="Email: "
-                        />
-                        <button type="button" onClick={() => remove(index)}>
-                          Видалити
-                        </button>
-                      </div>
-                    ))}
-                  <button
-                    type="button"
-                    onClick={() => push({ name: "", email: "" })}
-                  >
-                    Додати до списку очікування
-                  </button>
-                </div>
-              )}
-            </FieldArray>
+              <FieldArray name="waitlist">
+                {({ push, remove }) => (
+                  <div>
+                    {values.waitlist &&
+                      values.waitlist.length > 0 &&
+                      values.waitlist.map((waitlistItem, index) => (
+                        <div key={index}>
+                          <InputForm
+                            name={`waitlist.${index}.name`}
+                            type="text"
+                            placeholder="Ім'я"
+                            textLabel="Ім'я: "
+                          />
+                          <InputForm
+                            name={`waitlist.${index}.email`}
+                            type="email"
+                            placeholder="Email"
+                            textLabel="Email: "
+                          />
+                          <button type="button" onClick={() => remove(index)}>
+                            Видалити
+                          </button>
+                        </div>
+                      ))}
+                    <button
+                      type="button"
+                      onClick={() => push({ name: "", email: "" })}
+                    >
+                      Додати до списку очікування
+                    </button>
+                  </div>
+                )}
+              </FieldArray>
 
-            <div>
-              <Upload {...props}>
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-              </Upload>
-              <ErrorMessage name="image" component={"span"}></ErrorMessage>
-            </div>
-
-            <button type="submit">Додати</button>
-          </Form>
-        )}
-      </Formik>
+              <div>
+                <Upload {...props}>
+                  <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
+                <ErrorMessage name="image" component={"span"}></ErrorMessage>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </Modal>
     </div>
   );
 }

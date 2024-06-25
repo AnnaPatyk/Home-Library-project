@@ -1,12 +1,14 @@
 import React from "react";
 import style from "./card.module.css";
+import { httpImg } from "../../app/http";
 export default function Card({ obj }) {
+  const url = new URL(obj.image, httpImg);
   return (
     <div className={style.card}>
       <div className={style.imageBox}>
         <img
           className={style.img}
-          src={Array.isArray(obj.image) ? obj.image[0] : obj.image}
+          src={Array.isArray(obj.image) ? obj.image[0] : url}
           alt="description"
         />
       </div>

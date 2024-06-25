@@ -6,6 +6,8 @@ import BookPopup from "./BookPopup";
 import { message } from "antd";
 import Coments from "../comentsBlock/Coments";
 import CommentsCarousel from "../comentsBlock/CommentsCarousel";
+import UpdateBook from "./UpdateBook";
+import { httpImg } from "../../app/http";
 const star = "\u2605";
 
 export default function Book() {
@@ -51,7 +53,7 @@ export default function Book() {
     !loading && info();
     formikBag.resetForm();
   };
-
+  const url = new URL(book.image, httpImg);
   return (
     <section>
       <article>
@@ -76,7 +78,7 @@ export default function Book() {
         </div>
         <div>
           <img
-            src={Array.isArray(book.image) ? book.image[0] : book.image}
+            src={Array.isArray(book.image) ? book.image[0] : url}
             alt="description"
           />
         </div>
@@ -97,7 +99,7 @@ export default function Book() {
       </article>
       {contextHolder}
 
-      {login && <button>Редагувати </button>}
+      {login && <UpdateBook></UpdateBook>}
 
       <BookPopup
         state={free}
