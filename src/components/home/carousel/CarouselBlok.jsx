@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import style from "./carouselBlok.module.css";
 import "./slick.css";
 import "./slick-theme.css";
+import { httpImg } from "../../../app/http";
 
 const CarouselBlock = ({ arr }) => {
   const settings = {
@@ -24,7 +25,11 @@ const CarouselBlock = ({ arr }) => {
           <div key={index} className={style.carouselBlokContent}>
             <div style={{ height: "300px", objectFit: "contain" }}>
               <img
-                src={obj.image}
+                src={
+                  Array.isArray(obj.image)
+                    ? obj.image[0]
+                    : new URL(obj.image, httpImg)
+                }
                 alt={obj.title}
                 style={{
                   width: "100%",
