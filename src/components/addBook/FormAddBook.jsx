@@ -6,6 +6,7 @@ import { Button, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import InputForm from "../generalСomponents/inputForm/InputForm";
 import { ShemaFormAddBook, genres, initialValue } from "./formAddBookShema";
+import styles from "./fomAddBook.module.css";
 
 export default function FormAddBook() {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ export default function FormAddBook() {
     [img, dispatch]
   );
   return (
-    <div>
+    <div className={styles.containerForm}>
       <h2>Додати книгу</h2>
       <Formik
         initialValues={initialValue}
@@ -54,7 +55,7 @@ export default function FormAddBook() {
         onSubmit={submitHandler}
       >
         {() => (
-          <Form>
+          <Form className={styles.form}>
             <InputForm
               name={"title"}
               type={"text"}
@@ -71,41 +72,46 @@ export default function FormAddBook() {
               component={"span"}
               textLabel={"Автор : "}
             ></InputForm>
-            <InputForm
-              name={"publicationYear"}
-              type={"number"}
-              id={"publicationYear"}
-              placeholder={"Рік видавництва"}
-              component={"span"}
-              textLabel={"Рік видавництва: "}
-            ></InputForm>
-            <div>
-              <Field as="select" name="genre">
-                <option value="">Оберіть жанр</option>
-                {genres.map((genre, index) => (
-                  <option key={index} value={genre}>
-                    {genre}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="genre" component={"span"}></ErrorMessage>
-            </div>
-            <div>
-              <Field as="select" name="status">
-                <option value="">Оберіть статус</option>
-                <option value="available">{"Доступна"}</option>
-                <option value="soon">{"Незабаром у доступі"}</option>
-              </Field>
+            <div className={styles.blockSelekt}>
+              <InputForm
+                name={"publicationYear"}
+                type={"number"}
+                id={"publicationYear"}
+                placeholder={"Рік видавництва"}
+                component={"span"}
+                textLabel={"Рік видавництва: "}
+              ></InputForm>
+
+              <InputForm
+                name={"rating"}
+                type={"number"}
+                id={"rating"}
+                placeholder={"Рейтинг"}
+                component={"span"}
+                textLabel={"Рейтинг: "}
+              ></InputForm>
             </div>
 
-            <InputForm
-              name={"rating"}
-              type={"number"}
-              id={"rating"}
-              placeholder={"Рейтинг"}
-              component={"span"}
-              textLabel={"Рейтинг: "}
-            ></InputForm>
+            <div className={styles.blockSelekt}>
+              <div className={styles.blokDiv}>
+                <Field className={styles.selctForm} as="select" name="genre">
+                  <option value="">Оберіть жанр</option>
+                  {genres.map((genre, index) => (
+                    <option key={index} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage name="genre" component={"span"}></ErrorMessage>
+              </div>
+              <div className={styles.blokDiv}>
+                <Field className={styles.selctForm} as="select" name="status">
+                  <option value="">Оберіть статус</option>
+                  <option value="available">{"Доступна"}</option>
+                  <option value="soon">{"Незабаром у доступі"}</option>
+                </Field>
+              </div>
+            </div>
 
             <InputForm
               name={"description"}

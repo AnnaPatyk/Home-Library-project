@@ -7,6 +7,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import InputForm from "../generalСomponents/inputForm/InputForm";
 import BookSchema from "./updateBookSchema";
 import { useParams } from "react-router-dom";
+import styles from "./updateButton.module.css";
 const genres = [
   "Фантастика",
   "Пригоди",
@@ -89,8 +90,12 @@ function UpdateBook() {
     [img, dispatch, id, info, showModal]
   );
   return (
-    <div>
-      <button style={{ marginTop: "50px" }} onClick={showModal}>
+    <div style={{ textAlign: "center", padding: "16px" }}>
+      <button
+        className={styles.updateButton}
+        style={{ marginTop: "50px" }}
+        onClick={showModal}
+      >
         Редагувати
       </button>
       {contextHolder}

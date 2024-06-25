@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import InputForm from "../generalСomponents/inputForm/InputForm";
 import { updateBook } from "../../thunks/booksThunks";
 import schema from "./schemsComments";
+import styles from "./comentButton.module.css";
 
 const initialValue = {
   userName: "",
@@ -18,12 +19,12 @@ const Coments = ({ id, book }) => {
   const dispatch = useDispatch();
   const formikRef = useRef(null);
 
-    const showBookModal = useCallback(() => {
-      setOpen(!open);
-    }, [open]);
-    const info = useCallback(() => {
-      messageApi.info("Запит відправлено");
-    }, [messageApi]);
+  const showBookModal = useCallback(() => {
+    setOpen(!open);
+  }, [open]);
+  const info = useCallback(() => {
+    messageApi.info("Запит відправлено");
+  }, [messageApi]);
 
   const submitHandler = useCallback(
     (values, formikBag) => {
@@ -39,7 +40,7 @@ const Coments = ({ id, book }) => {
 
   return (
     <Fragment>
-      <button onClick={showBookModal}>
+      <button className={styles.commentButton} onClick={showBookModal}>
         <CommentOutlined />
         {contextHolder}
       </button>

@@ -9,16 +9,20 @@ const ArtiklBlok = ({ title, arr, button }) => {
     <article className={style.article}>
       <h4>{title}</h4>
       <div className={style.articleCards}>
-        {arr.map((book) => (
-          <Link
-            className={classNames(style.cardLink)}
-            key={book._id}
-            to={`/${book._id}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
+        {arr.map((book) =>
+          title !== "Новини" ? (
+            <Link
+              className={classNames(style.cardLink)}
+              key={book._id}
+              to={`/${book._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Card obj={book}></Card>
+            </Link>
+          ) : (
             <Card obj={book}></Card>
-          </Link>
-        ))}
+          )
+        )}
       </div>
       {button}
     </article>

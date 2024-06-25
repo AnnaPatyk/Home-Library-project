@@ -1,0 +1,66 @@
+.containerForm {
+   width: 100%;
+   max-width: 600px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #1f1f1f;
+   color: #fff;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.containerForm h2 {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.form {
+   display: flex;
+   flex-direction: column;
+}
+
+.blockSelekt {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.blokDiv {
+   width: 48%;
+}
+
+.selctForm {
+   width: 100%;
+   padding: 10px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   background-color: #fff;
+   color: #000;
+}
+
+.form button[type="submit"] {
+   padding: 10px 20px;
+   font-size: 16px;
+   color: white;
+   background-color: #007bff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-top: 20px;
+}
+
+.form button[type="submit"]:hover {
+   background-color: #0056b3;
+}
+
+.ant-btn {
+   margin-top: 10px;
+}
+
+.form span {
+   color: red;
+   font-size: 14px;
+   margin-top: 5px;
+   display: block;
+}
