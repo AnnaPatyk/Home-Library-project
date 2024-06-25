@@ -1,0 +1,23 @@
+.filterBlok {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   padding: 10px;
+}
+.filterBlok button {
+   flex: 1 1 calc(50% - 10px);
+   padding: 10px;
+   color: white;
+   background-color: #736b62;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   cursor: pointer;
+   box-sizing: border-box;
+   transition: 0.5s ease-in-out;
+}
+.filterBlok button:hover {
+   background-color: #bf9d7e;
+}
+.filterBlok h4 {
+   flex: 1 0 100%;
+}

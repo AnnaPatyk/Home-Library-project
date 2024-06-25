@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "../home/carousel/slick.css";
 import "../home/carousel/slick-theme.css";
 
-export default function CommentsCarousel({ arr }) {
+function CommentsCarousel({ arr }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -25,3 +25,4 @@ export default function CommentsCarousel({ arr }) {
     </Slider>
   );
 }
+export default React.memo(CommentsCarousel);

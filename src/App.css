@@ -17,4 +17,6 @@ main {
    flex-direction: column;
    justify-content: space-between;
    align-items: center;
+   background: linear-gradient(to left, #eedbbf, #736b62 50%, #bf9d7e 100%);
+   padding-bottom: 24px;
 }

@@ -1,0 +1,10 @@
+.carouselBlok {
+   width: 100%;
+   overflow: hidden;
+   color: white;
+   text-align: center;
+   background-color: #736b629f;
+}
+.carouselBlokContent {
+   max-height: 500px;
+}

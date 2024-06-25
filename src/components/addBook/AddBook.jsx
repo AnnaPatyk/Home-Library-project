@@ -1,10 +1,11 @@
 import React from "react";
 import FormAddBook from "./FormAddBook";
 
-export default function AddBook() {
+function AddBook() {
   return (
-    <div>
+    <div style={{ height: "100vh", backgroundColor: "#0D0D0D" }}>
       <FormAddBook></FormAddBook>
     </div>
   );
 }
+export default React.memo(AddBook);

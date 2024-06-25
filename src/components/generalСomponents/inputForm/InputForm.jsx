@@ -1,7 +1,7 @@
 import { ErrorMessage, Field } from "formik";
 import React from "react";
 
-export default function InputForm({
+const InputForm = ({
   name,
   type,
   id,
@@ -9,7 +9,7 @@ export default function InputForm({
   component,
   textLabel,
   as,
-}) {
+}) => {
   return (
     <div>
       <label htmlFor={name}>{textLabel} </label>
@@ -23,4 +23,5 @@ export default function InputForm({
       <ErrorMessage name={name} component={component}></ErrorMessage>
     </div>
   );
-}
+};
+export default React.memo(InputForm);

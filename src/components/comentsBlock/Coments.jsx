@@ -1,7 +1,7 @@
 import { CommentOutlined } from "@ant-design/icons";
 import { Modal, message } from "antd";
 import { Form, Formik } from "formik";
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useCallback, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import InputForm from "../generalСomponents/inputForm/InputForm";
 import { updateBook } from "../../thunks/booksThunks";
@@ -12,27 +12,31 @@ const initialValue = {
   comment: "",
 };
 
-export default function Coments({ id, book }) {
+const Coments = ({ id, book }) => {
   const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
   const formikRef = useRef(null);
 
-  const submitHandler = (values, formikBag) => {
-    const newArr = [...book.comments, values];
-    const update = { comments: newArr };
-    dispatch(updateBook({ id, update }));
-    showBookModal();
-    info();
-    formikBag.resetForm();
-  };
+    const showBookModal = useCallback(() => {
+      setOpen(!open);
+    }, [open]);
+    const info = useCallback(() => {
+      messageApi.info("Запит відправлено");
+    }, [messageApi]);
 
-  const showBookModal = () => {
-    setOpen(!open);
-  };
-  const info = () => {
-    messageApi.info("Запит відправлено");
-  };
+  const submitHandler = useCallback(
+    (values, formikBag) => {
+      const newArr = [...book.comments, values];
+      const update = { comments: newArr };
+      dispatch(updateBook({ id, update }));
+      showBookModal();
+      info();
+      formikBag.resetForm();
+    },
+    [book.comments, dispatch, id, showBookModal, info]
+  );
+
   return (
     <Fragment>
       <button onClick={showBookModal}>
@@ -83,4 +87,5 @@ export default function Coments({ id, book }) {
       {contextHolder}
     </Fragment>
   );
-}
+};
+export default React.memo(Coments);

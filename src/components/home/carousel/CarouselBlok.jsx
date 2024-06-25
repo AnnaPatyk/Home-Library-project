@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import style from "./carouselBlok.module.css";
 import "./slick.css";
 import "./slick-theme.css";
 
@@ -7,7 +8,7 @@ const CarouselBlock = ({ arr }) => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     speed: 3000,
@@ -16,18 +17,11 @@ const CarouselBlock = ({ arr }) => {
   };
 
   return (
-    <section
-      style={{
-        width: "100%",
-        overflow: "hidden",
-        color: "white",
-        textAlign: "center",
-      }}
-    >
+    <section className={style.carouselBlok}>
       <h2>Незабаром в наявності</h2>
       <Slider {...settings}>
         {arr.map((obj, index) => (
-          <div key={index} style={{ height: "500px", objectFit: "contain" }}>
+          <div key={index} className={style.carouselBlokContent}>
             <div style={{ height: "300px", objectFit: "contain" }}>
               <img
                 src={obj.image}
@@ -50,4 +44,4 @@ const CarouselBlock = ({ arr }) => {
   );
 };
 
-export default CarouselBlock;
+export default React.memo(CarouselBlock);

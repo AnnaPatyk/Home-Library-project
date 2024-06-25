@@ -1,0 +1,10 @@
+.newsBlock {
+   display: flex;
+   flex-direction: column;
+   background-color: #736b62;
+   padding: 16px;
+   gap: 34px;
+}
+.newsBlock h2 {
+   text-align: center;
+}

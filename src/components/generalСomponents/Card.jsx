@@ -1,7 +1,8 @@
 import React from "react";
 import style from "./card.module.css";
 import { httpImg } from "../../app/http";
-export default function Card({ obj }) {
+
+const Card = ({ obj }) => {
   const url = new URL(obj.image, httpImg);
   return (
     <div className={style.card}>
@@ -21,4 +22,5 @@ export default function Card({ obj }) {
       </div>
     </div>
   );
-}
+};
+export default React.memo(Card);

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBook, updateBook } from "../../thunks/booksThunks";
-import { Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BookPopup from "./BookPopup";
 import { message } from "antd";
 import Coments from "../comentsBlock/Coments";
@@ -16,44 +16,52 @@ export default function Book() {
   const [open, setOpen] = useState(false);
   const [free, setFree] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
-  const info = () => {
-    messageApi.info("Запит відправлено");
-  };
+  const url = new URL(book.image, httpImg);
   let { id } = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getBook(id));
   }, []);
+
   useEffect(() => {
     if (book && book.status) {
       setFree(book.status === "available");
     }
   }, [book]);
 
-  const showBookModal = () => {
-    setOpen(!open);
-  };
-  const submitHandler = (values, formikBag) => {
-    let update;
-    if (free) {
-      update = {
-        borrowedBy: values,
-        status: "unavailable",
-      };
-    } else {
-      let reservedBySet = new Set(book.waitlist);
-      reservedBySet.add(values);
-      update = {
-        waitlist: Array.from(reservedBySet),
-      };
-    }
+  const info = useCallback(() => {
+    messageApi.info("Запит відправлено");
+  }, [messageApi]);
 
-    dispatch(updateBook({ id, update }));
-    showBookModal();
-    !loading && info();
-    formikBag.resetForm();
-  };
-  const url = new URL(book.image, httpImg);
+  const showBookModal = useCallback(() => {
+    setOpen(!open);
+  }, [open]);
+
+  const submitHandler = useCallback(
+    (values, formikBag) => {
+      let update;
+      if (free) {
+        update = {
+          borrowedBy: values,
+          status: "unavailable",
+        };
+      } else {
+        let reservedBySet = new Set(book.waitlist);
+        reservedBySet.add(values);
+        update = {
+          waitlist: Array.from(reservedBySet),
+        };
+      }
+
+      dispatch(updateBook({ id, update }));
+      showBookModal();
+      !loading && info();
+      formikBag.resetForm();
+    },
+    [book.waitlist, dispatch, free, id, info, loading, showBookModal]
+  );
+
   return (
     <section>
       <article>

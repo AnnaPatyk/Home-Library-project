@@ -1,19 +1,22 @@
 import React from "react";
+import style from "./blockNews.module.css";
 
-export default function BlockNews({ obj }) {
+const BlockNews = ({ obj }) => {
   return (
-    <section>
+    <section className={style.blockNews}>
       <h3>{obj.title}</h3>
-      <div>
+      <div className={style.content}>
         <p>{obj.content}</p>
-        <img src={obj.image[0]} />
       </div>
-      <p>
+      <div className={style.blockImg}>
+        <img src={obj.image[0]} alt="img" />
+      </div>
+      <p className={style.info}>
         <span>{obj.author}</span>
         <span>{obj.publishedDate}</span>
       </p>
       {obj.tags && (
-        <p>
+        <p className={style.tags}>
           {obj.tags.map((tag) => (
             <span>#{tag}, </span>
           ))}
@@ -21,4 +24,5 @@ export default function BlockNews({ obj }) {
       )}
     </section>
   );
-}
+};
+export default React.memo(BlockNews);

@@ -1,0 +1,41 @@
+.footer {
+   min-height: 70px;
+   background-color: #736b62;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.footerContent {
+   flex: 0 1 50%;
+   display: flex;
+   justify-content: center;
+   gap: 14px;
+   font-size: 24px;
+}
+.iconsF,
+.iconsI,
+.iconsT,
+.iconsY {
+   color: #f2f2f2;
+   font-size: 24px;
+   transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+}
+
+.iconsF:hover {
+   color: #3b5998;
+   transform: scale(1.2);
+}
+.iconsI:hover {
+   color: #e56969;
+   transform: scale(1.2);
+}
+.iconsY :hover {
+   color: #c4302b;
+   transform: scale(1.2);
+}
+.iconsT:hover {
+   color: #00acee;
+   transform: scale(1.2);
+}

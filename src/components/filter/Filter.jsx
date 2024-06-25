@@ -1,7 +1,9 @@
 import React from "react";
-export default function Filter({ genre, clickHandler }) {
+import style from "./filter.module.css";
+const Filter = ({ genre, clickHandler }) => {
   return (
-    <aside>
+    <aside className={style.filterBlok}>
+      <h4>Жанр</h4>
       {genre.map((genre, index) => (
         <button key={index} onClick={() => clickHandler(genre)}>
           {genre}
@@ -10,4 +12,5 @@ export default function Filter({ genre, clickHandler }) {
       <button onClick={() => clickHandler("all")}> Всі книги</button>
     </aside>
   );
-}
+};
+export default React.memo(Filter);

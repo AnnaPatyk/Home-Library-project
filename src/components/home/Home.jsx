@@ -3,13 +3,15 @@ import ArtiklBlok from "../generalСomponents/ArtiklBlok";
 import { useSelector } from "react-redux";
 import LinkBook from "../generalСomponents/LinkBook";
 import CarouselBlok from "./carousel/CarouselBlok";
+import WelcomeMessage from "./Welcome";
 
-export default function Home() {
+const Home = () => {
   const { data: books } = useSelector((state) => state.books);
   const { data: news } = useSelector((state) => state.news);
 
   return (
     <main>
+      <WelcomeMessage></WelcomeMessage>
       <CarouselBlok
         arr={books.filter((obj) => obj.status === "soon")}
       ></CarouselBlok>
@@ -30,4 +32,5 @@ export default function Home() {
       ></ArtiklBlok>
     </main>
   );
-}
+};
+export default React.memo(Home);

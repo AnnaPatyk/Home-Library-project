@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function LinkBook({ link, title }) {
+const LinkBook = ({ link, title }) => {
   return (
     <>
       <Link to={link}>{title} </Link>
     </>
   );
 }
+export default React.memo(LinkBook)

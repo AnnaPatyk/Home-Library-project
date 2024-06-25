@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
-import React, { useRef, useState } from "react";
-
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBook } from "../../thunks/booksThunks";
 import { Button, Modal, Upload, message } from "antd";
@@ -37,7 +36,7 @@ const genres = [
   "Науково-фантастична література",
 ];
 
-export default function UpdateBook() {
+function UpdateBook() {
   const book = useSelector((state) => state.book.data);
   const formikRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -45,42 +44,50 @@ export default function UpdateBook() {
   let { id } = useParams();
   const dispatch = useDispatch();
   const [img, setImg] = useState("");
-  const props = {
-    name: "image",
-    action: "http://localhost:4000/upload-img",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-        setImg(info.file.name);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
-  const info = () => {
+  const props = useMemo(
+    () => ({
+      name: "image",
+      action: "http://localhost:4000/upload-img",
+      headers: {
+        authorization: "authorization-text",
+      },
+      onChange(info) {
+        if (info.file.status !== "uploading") {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === "done") {
+          message.success(`${info.file.name} file uploaded successfully`);
+          setImg(info.file.name);
+        } else if (info.file.status === "error") {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    }),
+    []
+  );
+  const info = useCallback(() => {
     messageApi.info("Запит відправлено");
-  };
-  const showModal = () => {
-    setOpen(!open);
-  };
-  const submitHandler = (values, formikBag) => {
-    if (img === "") {
-      formikBag.setErrors({ image: "помилка" });
-      return;
-    }
-    const update = { ...values, image: img };
+  }, [messageApi]);
 
-    dispatch(updateBook({ id, update }));
-    info();
-    showModal();
-    formikBag.resetForm();
-  };
+  const showModal = useCallback(() => {
+    setOpen(!open);
+  }, [open]);
+
+  const submitHandler = useCallback(
+    (values, formikBag) => {
+      if (img === "") {
+        formikBag.setErrors({ image: "помилка" });
+        return;
+      }
+      const update = { ...values, image: img };
+
+      dispatch(updateBook({ id, update }));
+      info();
+      showModal();
+      formikBag.resetForm();
+    },
+    [img, dispatch, id, info, showModal]
+  );
   return (
     <div>
       <button style={{ marginTop: "50px" }} onClick={showModal}>
@@ -246,3 +253,4 @@ export default function UpdateBook() {
     </div>
   );
 }
+export default React.memo(UpdateBook);

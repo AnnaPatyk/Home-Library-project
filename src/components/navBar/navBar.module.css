@@ -2,7 +2,7 @@
    position: -webkit-sticky;
    position: sticky;
    top: 0;
-   background-color: #08261899;
+   background-color: #bf9d7eb3;
 
    -webkit-backdrop-filter: blur(10px);
    backdrop-filter: blur(10px);
@@ -35,7 +35,7 @@
 .navLinks {
    position: relative;
    text-decoration: none;
-   color: #37a67d;
+   color: #f2f2f2;
    letter-spacing: 3px;
    padding: 15px;
    transition: color 0.3s ease-in-out;
@@ -48,7 +48,7 @@
    bottom: 0;
    left: 0;
    width: 0;
-   background-image: linear-gradient(to right, #37a67d, #27f2de93);
+   background-image: linear-gradient(to right, #736b62, #f2f2f2c0);
    transition: width 0.3s ease-in-out;
 }
 

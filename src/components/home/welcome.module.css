@@ -1,0 +1,54 @@
+.sectionWelcome {
+   display: grid;
+   gap: 1.25rem;
+   height: auto;
+   align-items: center;
+   overflow: hidden;
+   grid-template-columns: 1fr 1fr;
+   padding: 16px;
+   background: linear-gradient(to left, #eedbbf, #736b62 50%, #bf9d7e 100%);
+}
+.sectionWelcomeContent {
+   padding: 16px;
+   align-self: center;
+   justify-self: center;
+   background-color: #25252473;
+   box-shadow: 0px 0px 18px 0px #25252473;
+}
+.sectionWelcomeContent p {
+   color: #bf9d7e;
+}
+.sectionWelcomeImage {
+   width: 100%;
+   overflow: hidden;
+   align-self: center;
+   justify-self: center;
+}
+.sectionWelcomeImage img {
+   width: 100%;
+   height: 100%;
+   -o-object-fit: cover;
+   object-fit: cover;
+   -o-object-position: center -110px;
+   object-position: center -100px;
+}
+.WelcomeContentList {
+   list-style-type: none;
+   padding: 16px;
+}
+.WelcomeContentList li {
+   padding-left: 20px;
+   position: relative;
+   line-height: 1.5;
+}
+
+.WelcomeContentList li::marker {
+   content: "❖";
+   color: #f2f2f2;
+   font-size: 20px;
+   margin-right: 16px;
+   position: absolute;
+   left: 0;
+   top: 50%;
+   transform: translateY(-50%);
+}
