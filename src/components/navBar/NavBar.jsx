@@ -21,12 +21,12 @@ const NavBar = () => {
             Add book
           </NavLink>
         </div>
-        <div className={style.login}>
+        {/**<div className={style.login}>
           {" "}
           <NavLink className={style.navLinks} to={"/login"}>
             login
           </NavLink>
-        </div>
+        </div> */}
       </nav>
     </header>
   );
