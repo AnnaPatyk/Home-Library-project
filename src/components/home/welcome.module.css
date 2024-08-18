@@ -19,6 +19,7 @@
    color: #bf9d7e;
 }
 .sectionWelcomeImage {
+   position: relative;
    width: 100%;
    overflow: hidden;
    align-self: center;

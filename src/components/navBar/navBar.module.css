@@ -33,12 +33,12 @@
    flex-wrap: wrap;
 }
 .navLinks {
-   position: relative;
-   text-decoration: none;
-   color: #f2f2f2;
-   letter-spacing: 3px;
-   padding: 15px;
-   transition: color 0.3s ease-in-out;
+   position: relative !important;
+   text-decoration: none !important;
+   color: #f2f2f2 !important;
+   letter-spacing: 3px !important;
+   padding: 15px !important;
+   transition: color 0.3s ease-in-out !important;
 }
 .navLinks::before {
    z-index: -1;

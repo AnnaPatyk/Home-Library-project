@@ -20,7 +20,7 @@ const ArtiklBlok = ({ title, arr, button }) => {
               <Card obj={book}></Card>
             </Link>
           ) : (
-            <Card obj={book}></Card>
+            <Card key={book._id} obj={book}></Card>
           )
         )}
       </div>

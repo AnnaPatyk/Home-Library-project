@@ -30,8 +30,10 @@ const Footer = () => {
   return (
     <footer className={style.footer}>
       <div className={style.footerContent}>
-        {socialNetworks.map((link) => (
-          <Link to={link.url}>{link.img}</Link>
+        {socialNetworks.map((link, index) => (
+          <Link key={index} to={link.url}>
+            {link.img}
+          </Link>
         ))}
       </div>
     </footer>

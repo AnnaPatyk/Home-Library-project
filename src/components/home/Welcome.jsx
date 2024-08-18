@@ -1,12 +1,14 @@
 import React from "react";
 import style from "./welcome.module.css";
 import img from "../../img/png-klev-club-p-raskritaya-kniga-png-21.png";
+import RegistrationForm from "../login/RegistrationForm";
 
 const WelcomeMessage = () => {
   return (
     <section className={style.sectionWelcome}>
       <div className={style.sectionWelcomeImage}>
         <img src={img} alt="book" />
+        <RegistrationForm></RegistrationForm>
       </div>
       <div className={style.sectionWelcomeContent}>
         <h1>Ласкаво просимо до "Моєї домашьої бібліотеки"</h1>
