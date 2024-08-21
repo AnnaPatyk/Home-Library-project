@@ -2,13 +2,15 @@ import React from "react";
 import style from "./welcome.module.css";
 import img from "../../img/png-klev-club-p-raskritaya-kniga-png-21.png";
 import RegistrationForm from "../login/RegistrationForm";
+import { useSelector } from "react-redux";
 
 const WelcomeMessage = () => {
+  const token = useSelector((state) => state.loginUser.token);
   return (
     <section className={style.sectionWelcome}>
       <div className={style.sectionWelcomeImage}>
         <img src={img} alt="book" />
-        <RegistrationForm></RegistrationForm>
+        {!token && <RegistrationForm></RegistrationForm>}
       </div>
       <div className={style.sectionWelcomeContent}>
         <h1>Ласкаво просимо до "Моєї домашьої бібліотеки"</h1>
