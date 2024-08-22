@@ -13,6 +13,14 @@ const initialState = {
 const loginUserSlice = createSlice({
   name: "loginUser",
   initialState,
+  reducers: {
+    resetUser: (state) => {
+      state.data = null;
+      state.token = null;
+      state.error = null;
+      state.errore = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -44,5 +52,5 @@ const loginUserSlice = createSlice({
       });
   },
 });
-
+export const { resetUser } = loginUserSlice.actions;
 export default loginUserSlice.reducer;

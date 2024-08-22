@@ -7,6 +7,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../thunks/loginThunks";
 import { authUser } from "../../thunks/authUserThunk";
+import MenuExit from "./MenuExit";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,9 +20,7 @@ const NavBar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
-
-    if (token) {
+    if (token && token !== "null") {
       dispatch(authUser(token));
     }
   }, []);
@@ -77,7 +76,7 @@ const NavBar = () => {
         <div className={style.login}>
           {" "}
           {token ? (
-            <div className={style.navLinks}>{user.name}</div>
+            <div className={style.navLinks}>{<MenuExit />}</div>
           ) : (
             <button
               style={{ all: "unset" }}

@@ -1,28 +1,28 @@
 import React from "react";
-import { Menu, Dropdown, Button, message } from "antd";
-
-import Icon from "@ant-design/icons/lib/components/AntdIcon";
-
+import { Menu, Dropdown, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { resetUser } from "../../slice/loginUserSlice";
 export default function MenuExit() {
+  const userName = useSelector((state) => state.loginUser.data.name);
+  const dispatch = useDispatch();
   function handleMenuClick(e) {
-    message.info("Click on menu item.");
-    console.log("click", e);
+    dispatch(resetUser());
   }
 
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1">
-        <Icon type="user" />
-        1st menu item
-      </Menu.Item>
+      <Menu.Item key="1">{"Вихід"}</Menu.Item>
     </Menu>
   );
 
   return (
-    <Dropdown menu={menu}>
-      <Button>
-        Button <Icon type="down" />
-      </Button>
-    </Dropdown>
+    <div id="components-dropdown-demo-dropdown-button">
+      <Dropdown overlay={menu}>
+        <Button>
+          {userName} <UserOutlined />
+        </Button>
+      </Dropdown>
+    </div>
   );
 }
